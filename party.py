@@ -3,7 +3,6 @@
 from trytond import backend
 from trytond.model import ModelSQL, ValueMixin, fields
 from trytond.pool import Pool, PoolMeta
-from trytond.tools.multivalue import migrate_property
 
 
 class Party(metaclass=PoolMeta):
