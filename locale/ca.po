@@ -1,0 +1,54 @@
+#
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:party.party,purchase_invoice_grouping_method:"
+msgid "Purchase Invoice Grouping Method"
+msgstr "Mètode d'agrupació de factures de compra"
+
+msgctxt "field:party.party,purchase_invoice_grouping_methods:"
+msgid "Purchased Invoice Grouping Methods"
+msgstr "Mètodes d'agrupació de factures de compra"
+
+msgctxt "field:party.party.purchase_invoice_grouping_method,party:"
+msgid "Party"
+msgstr "Tercer"
+
+msgctxt ""
+"field:party.party.purchase_invoice_grouping_method,purchase_invoice_grouping_method:"
+msgid "Purchase Invoice Grouping Method"
+msgstr "Mètode d'agrupació de factures de compra"
+
+msgctxt "field:purchase.configuration,purchase_invoice_grouping_method:"
+msgid "purchase Invoice Grouping Method"
+msgstr "Mètode d'agrupació de factures de compra"
+
+msgctxt ""
+"field:purchase.configuration.purchase_method,purchase_invoice_grouping_method:"
+msgid "purchase Invoice Grouping Method"
+msgstr "Mètode d'agrupació de factures de compra"
+
+msgctxt "help:purchase.configuration,purchase_invoice_grouping_method:"
+msgid "The default invoice grouping method for new customers."
+msgstr "El mètode d'agrupació de factures predeterminat per a proveïdors nous."
+
+msgctxt ""
+"help:purchase.configuration.purchase_method,purchase_invoice_grouping_method:"
+msgid "The default invoice grouping method for new customers."
+msgstr "El mètode d'agrupació de factures predeterminat per a proveïdors nous."
+
+msgctxt "model:party.party.purchase_invoice_grouping_method,name:"
+msgid "Party Sale Invoice Grouping Method"
+msgstr "Mètode d'agrupació de factures de compra de proveïdor"
+
+msgctxt "selection:party.party,purchase_invoice_grouping_method:"
+msgid "None"
+msgstr "Cap"
+
+msgctxt "selection:party.party,purchase_invoice_grouping_method:"
+msgid "Standard"
+msgstr "Estàndard"
+
+msgctxt "view:party.party:"
+msgid "Invoicing"
+msgstr "Facturació"
