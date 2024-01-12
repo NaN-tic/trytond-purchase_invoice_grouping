@@ -29,7 +29,7 @@ class PartyPurchaseInvoiceGroupingMethod(ModelSQL, ValueMixin):
     "Party Sale Invoice Grouping Method"
     __name__ = 'party.party.purchase_invoice_grouping_method'
     party = fields.Many2One(
-        'party.party', "Party", ondelete='CASCADE', select=True)
+        'party.party', "Party", ondelete='CASCADE')
     purchase_invoice_grouping_method = fields.Selection(
         'get_purchase_invoice_grouping_methods', "Purchase Invoice Grouping Method")
 
