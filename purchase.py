@@ -3,7 +3,7 @@
 
 from itertools import groupby
 
-from trytond.pool import PoolMeta
+from trytond.pool import PoolMeta, Pool
 from trytond.transaction import Transaction
 
 
@@ -29,8 +29,11 @@ class Purchase(metaclass=PoolMeta):
         Invoice = invoice.__class__
         invoice_domain = [
             ('lines.origin', 'like', 'purchase.line,%'),
-            ('purchases.warehouse', '=', self.warehouse.id)
             ]
+        if invoice and invoice.party and invoice.party.group_by_warehouse:
+            invoice_domain.append(('purchases.warehouse', '=',
+                self.warehouse.id))
+
         defaults = Invoice.default_get(self._invoice_grouping_fields,
             with_rec_name=False)
         for field in self._invoice_grouping_fields:
@@ -40,6 +43,9 @@ class Purchase(metaclass=PoolMeta):
         return invoice_domain
 
     def _get_invoice_purchase(self):
+        pool = Pool()
+        Configuration = pool.get('purchase.configuration')
+        config  = Configuration(1)
         transaction = Transaction()
         context = transaction.context
         invoice = super()._get_invoice_purchase()
@@ -53,6 +59,9 @@ class Purchase(metaclass=PoolMeta):
             grouped_invoices = Invoice.search(domain, order=order, limit=1)
             if grouped_invoices:
                 invoice, = grouped_invoices
+
+        if config.default_in_journal:
+            invoice.journal = config.default_in_journal
         return invoice
 
     @classmethod

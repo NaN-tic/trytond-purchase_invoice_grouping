@@ -8,6 +8,7 @@ purchase_invoice_grouping_method = fields.Selection(
     help="The default invoice grouping method for new customers.")
 
 
+
 @classmethod
 def get_purchase_invoice_grouping_methods(cls):
     pool = Pool()
@@ -21,13 +22,17 @@ class Configuration(metaclass=PoolMeta):
 
     purchase_invoice_grouping_method = fields.MultiValue(
         purchase_invoice_grouping_method)
+    default_in_journal = fields.Many2One('account.journal', "Default In Journal",
+        help="The default journal for purchase invoices.")
+
     get_purchase_invoice_grouping_methods = get_purchase_invoice_grouping_methods
 
     @classmethod
     def multivalue_model(cls, field):
         pool = Pool()
-        if field == 'purchase_invoice_grouping_method':
+        if field  == 'purchase_invoice_grouping_method':
             return pool.get('purchase.configuration.purchase_method')
+
         return super(Configuration, cls).multivalue_model(field)
 
 
