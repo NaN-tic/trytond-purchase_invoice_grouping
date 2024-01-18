@@ -6,5 +6,7 @@ this repository contains the full copyright notices and license terms. -->
         <separator string="Invoicing" colspan="4" id="invoicing"/>
         <label name="purchase_invoice_grouping_method"/>
         <field name="purchase_invoice_grouping_method"/>
+        <label name="group_by_warehouse"/>
+        <field name="group_by_warehouse"/>
     </xpath>
 </data>

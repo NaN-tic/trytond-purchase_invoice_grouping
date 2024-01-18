@@ -17,6 +17,8 @@ class Party(metaclass=PoolMeta):
     purchase_invoice_grouping_methods = fields.One2Many(
         'party.party.purchase_invoice_grouping_method', 'party',
         "Purchased Invoice Grouping Methods")
+    group_by_warehouse = fields.Boolean('Group by Warehouse')
+
 
     @classmethod
     def default_purchase_invoice_grouping_method(cls, **pattern):
@@ -25,6 +27,9 @@ class Party(metaclass=PoolMeta):
         return Configuration(1).get_multivalue(
             'purchase_invoice_grouping_method', **pattern)
 
+    @staticmethod
+    def default_group_by_warehouse():
+        return True
 
 class PartyPurchaseInvoiceGroupingMethod(ModelSQL, ValueMixin):
     "Party Sale Invoice Grouping Method"
@@ -33,6 +38,7 @@ class PartyPurchaseInvoiceGroupingMethod(ModelSQL, ValueMixin):
         'party.party', "Party", ondelete='CASCADE')
     purchase_invoice_grouping_method = fields.Selection(
         'get_purchase_invoice_grouping_methods', "Purchase Invoice Grouping Method")
+
 
 
     @classmethod
