@@ -5,5 +5,7 @@ this repository contains the full copyright notices and license terms. -->
     <xpath expr="/form/field[@name='purchase_invoice_method']" position="after">
         <label name="purchase_invoice_grouping_method"/>
         <field name="purchase_invoice_grouping_method"/>
+        <label name="default_in_journal"/>
+        <field name="default_in_journal"/>
     </xpath>
 </data>
