@@ -2,11 +2,10 @@
 # repository contains the full copyright notices and license terms.
 from trytond import backend
 from trytond.model import ModelSQL, ValueMixin, fields
-from trytond.modules.company.model import CompanyValueMixin
+from trytond.transaction import Transaction
 from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
-from trytond.tools.multivalue import migrate_property
-
+from trytond.modules.company.model import CompanyValueMixin
 
 class Party(metaclass=PoolMeta):
     __name__ = 'party.party'
@@ -19,8 +18,10 @@ class Party(metaclass=PoolMeta):
     purchase_invoice_grouping_methods = fields.One2Many(
         'party.party.purchase_invoice_grouping_method', 'party',
         "Purchased Invoice Grouping Methods")
-    group_by_warehouse = fields.Boolean('Group by Warehouse')
-
+    group_by_warehouse = fields.MultiValue(fields.Boolean('Group by Warehouse'))
+    group_by_warehouses = fields.One2Many(
+        'party.party.purchase_invoice_grouping_method', 'party',
+        "Purchased Invoice Group by Warehouse")
 
     @classmethod
     def default_purchase_invoice_grouping_method(cls, **pattern):
@@ -29,9 +30,19 @@ class Party(metaclass=PoolMeta):
         return Configuration(1).get_multivalue(
             'purchase_invoice_grouping_method', **pattern)
 
-    @staticmethod
-    def default_group_by_warehouse():
+    @classmethod
+    def default_group_by_warehouse(cls, **pattern):
         return True
+
+    @classmethod
+    def multivalue_model(cls, field):
+        pool = Pool()
+        if field == 'group_by_warehouse':
+            return pool.get('party.party.purchase_invoice_grouping_method')
+
+        return super().multivalue_model(field)
+
+
 
 class PartyPurchaseInvoiceGroupingMethod(ModelSQL, CompanyValueMixin):
     "Party Sale Invoice Grouping Method"
@@ -44,7 +55,7 @@ class PartyPurchaseInvoiceGroupingMethod(ModelSQL, CompanyValueMixin):
         depends={'company'})
     purchase_invoice_grouping_method = fields.Selection(
         'get_purchase_invoice_grouping_methods', "Purchase Invoice Grouping Method")
-
+    group_by_warehouse = fields.Boolean('Group by Warehouse')
 
     @classmethod
     def get_purchase_invoice_grouping_methods(cls):
