@@ -2,6 +2,8 @@
 # repository contains the full copyright notices and license terms.
 from trytond import backend
 from trytond.model import ModelSQL, ValueMixin, fields
+from trytond.modules.company.model import CompanyValueMixin
+from trytond.pyson import Eval
 from trytond.pool import Pool, PoolMeta
 from trytond.tools.multivalue import migrate_property
 
@@ -31,14 +33,17 @@ class Party(metaclass=PoolMeta):
     def default_group_by_warehouse():
         return True
 
-class PartyPurchaseInvoiceGroupingMethod(ModelSQL, ValueMixin):
+class PartyPurchaseInvoiceGroupingMethod(ModelSQL, CompanyValueMixin):
     "Party Sale Invoice Grouping Method"
     __name__ = 'party.party.purchase_invoice_grouping_method'
     party = fields.Many2One(
-        'party.party', "Party", ondelete='CASCADE')
+        'party.party', "Party", ondelete='CASCADE',
+        context={
+            'company': Eval('company', -1),
+            },
+        depends={'company'})
     purchase_invoice_grouping_method = fields.Selection(
         'get_purchase_invoice_grouping_methods', "Purchase Invoice Grouping Method")
-
 
 
     @classmethod
