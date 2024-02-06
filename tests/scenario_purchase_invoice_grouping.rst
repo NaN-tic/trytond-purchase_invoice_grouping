@@ -115,6 +115,7 @@ purchase some products::
     >>> purchase.invoice_method = 'order'
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
+    >>> purchase_line.unit_price = Decimal('5.0000')
     >>> purchase_line.quantity = 2.0
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
@@ -150,6 +151,7 @@ Now we'll use the same scenario with the grouped customer::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 1.0
+    >>> purchase_line.unit_price = Decimal('5.0000')
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
     >>> purchase.state
@@ -164,6 +166,7 @@ Make another purchase::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 2.0
+    >>> purchase_line.unit_price = Decimal('5.0000')
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
     >>> purchase.state
@@ -203,6 +206,7 @@ Check that a new Purchase won't be grouped with the manual invoice::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 3.0
+    >>> purchase_line.unit_price = Decimal('5.0000')
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
     >>> purchase.state
@@ -229,6 +233,7 @@ Now we'll use the same scenario with the grouped customer but shipment method::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 1.0
+    >>> purchase_line.unit_price = Decimal('5.0000')
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
     >>> purchase.state
@@ -287,6 +292,7 @@ Make another purchase::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 2.0
+    >>> purchase_line.unit_price = Decimal('5.0000')
     >>> purchase.click('quote')
     >>> purchase.click('confirm')
     >>> purchase.state
@@ -323,13 +329,3 @@ Check still one Invoice are created::
     >>> len(invoices)
     1
     >>> set_user(purchase_user)
-
-
-
-
-
-
-
-
-
-
