@@ -263,7 +263,7 @@ Validate Shipments::
     >>> shipment.origins == purchase.rec_name
     True
     >>> shipment.click('receive')
-    >>> shipment.click('done')
+    >>> shipment.click('do')
     >>> purchase.reload()
     >>> purchase.shipment_state
     'received'
@@ -312,7 +312,7 @@ Validate Shipments::
     >>> shipment.origins == purchase.rec_name
     True
     >>> shipment.click('receive')
-    >>> shipment.click('done')
+    >>> shipment.click('do')
     >>> purchase.reload()
     >>> purchase.shipment_state
     'received'
