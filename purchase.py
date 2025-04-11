@@ -3,7 +3,7 @@
 
 from itertools import groupby
 
-from trytond.pool import PoolMeta, Pool
+from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
 
 
@@ -37,6 +37,10 @@ class Purchase(metaclass=PoolMeta):
         defaults = Invoice.default_get(self._invoice_grouping_fields,
             with_rec_name=False)
         for field in self._invoice_grouping_fields:
+            # Avoid payment_type field to control payable/receivable kind
+            # depend untaxed amount
+            if field == 'payment_type':
+                continue
             invoice_domain.append(
                 (field, '=', getattr(invoice, field, defaults.get(field)))
                 )
@@ -45,7 +49,7 @@ class Purchase(metaclass=PoolMeta):
     def _get_invoice_purchase(self):
         pool = Pool()
         Configuration = pool.get('purchase.configuration')
-        config  = Configuration(1)
+        config = Configuration(1)
         transaction = Transaction()
         context = transaction.context
         invoice = super()._get_invoice_purchase()
