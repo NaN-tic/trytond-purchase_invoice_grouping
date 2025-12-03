@@ -46,17 +46,17 @@ class Purchase(metaclass=PoolMeta):
                 )
         return invoice_domain
 
-    def _get_invoice_purchase(self):
+    def _get_invoice(self):
         pool = Pool()
         Configuration = pool.get('purchase.configuration')
         config = Configuration(1)
         transaction = Transaction()
         context = transaction.context
-        invoice = super()._get_invoice_purchase()
+        invoice = super()._get_invoice()
         if (not context.get('skip_grouping', False)
                 and self.invoice_grouping_method):
             with transaction.set_context(skip_grouping=True):
-                invoice = self._get_invoice_purchase()
+                invoice = self._get_invoice()
             Invoice = invoice.__class__
             domain = self._get_grouped_invoice_domain(invoice)
             order = self._get_grouped_invoice_order()
