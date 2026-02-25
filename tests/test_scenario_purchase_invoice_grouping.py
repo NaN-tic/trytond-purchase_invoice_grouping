@@ -169,7 +169,7 @@ class Test(unittest.TestCase):
         self.assertEqual(invoice.lines[1].quantity, 2.0)
 
         # Create a manual invoice
-        manual_invoice = Invoice()
+        manual_invoice = Invoice(type='out')
         manual_invoice.party = customer_grouped
         manual_invoice.payment_term = payment_term
         manual_invoice.save()
