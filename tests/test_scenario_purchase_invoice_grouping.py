@@ -201,7 +201,7 @@ class Test(unittest.TestCase):
         purchase = Purchase()
         purchase.party = customer_ship_grouped
         purchase.payment_term = payment_term
-        purchase.invoice_method = 'shipment'
+        purchase.invoice_method = 'fulfillment'
         purchase_line = purchase.lines.new()
         purchase_line.product = product
         purchase_line.quantity = 1.0
@@ -252,7 +252,7 @@ class Test(unittest.TestCase):
         purchase = Purchase()
         purchase.party = customer_ship_grouped
         purchase.payment_term = payment_term
-        purchase.invoice_method = 'shipment'
+        purchase.invoice_method = 'fulfillment'
         purchase_line = purchase.lines.new()
         purchase_line.product = product
         purchase_line.quantity = 2.0
